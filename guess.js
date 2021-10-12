@@ -16,7 +16,7 @@ let attempts;
 let guess;
 // ? For storing users response to play again or not play again ? \\
 let playAgain;
-const rangeTooHigh = `Please select an amount equal to or less than ${rangeNum}`
+
 
 
 
@@ -42,7 +42,7 @@ while (restartGame){
         // rangeNum = parseInt(rangeNum);
         rangeNum = parseInt(prompt(enterNumText)); // condensed version of above two lines.
     }
-
+    
     // Creates the random number (AKA number to be guessed by the user 'randomNum') using the range number entered by the user ('rangeNum'). 
     randomNum = Math.floor(Math.random() * rangeNum) + 1; // parenthesis will be worked out first because of order of operations
 
@@ -54,8 +54,9 @@ while (restartGame){
     while (!attempts || attempts < 1){
         attempts = parseInt(prompt(enterNumText));
     };
+    
     while (attempts > rangeNum){
-        attempts = parseInt(prompt(rangeTooHigh));
+        attempts = parseInt(prompt(`Please enter a range from 1 to ${rangeNum}`));
     };
 
     // Asks user to enter a guess in the range that they selected
@@ -68,12 +69,33 @@ while (restartGame){
 
         // Verifies the users guess is a number greater than 0 and LESS than the number entered for the range set by the user
         while (!guess || guess < 1 || guess > rangeNum){
-            guess = parseInt(prompt(`Please enter a number from 1 to ${rangeNum}`));
+            guess = parseInt(prompt(`Please enter a guess amount range from 1 to ${rangeNum}`));
         }
 
+        // Removes an attempt
+        attempts--;
 
-        
-        break;
+        // Checks if the user guessed correctly. If so the game ends. (NOTE: The break ends the loop)
+        if (guess === randomNum){
+            alert(`CONGRATULATIONS YOU GUESSED THE CORRECT NUMBER: ${randomNum}`);
+            break;
+
+        // Checks to see if the user has any attempts left 
+        } else if (attempts === 0){
+            alert(`I'M SORRY YOU RAN OUT OF ATTEMPTS!
+            The correct number was ${randomNum}`);
+            break;
+
+        // Checks if the users guess was too low and prompts user to guess again if that is the case
+        } else if (guess < randomNum){
+            guess = prompt(`You're too low!
+            You have ${attempts} left`);
+
+        // Checks if the users guess was too high and prompts user to guess again if that is the case
+        } else { // not another 'else if' because if its not too the only other possibility is too high
+            guess = prompt(`You're too high!
+            You have ${attempts} left`)
+        }
     }
 
     break; // infinite loop safeguard
