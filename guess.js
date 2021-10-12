@@ -70,7 +70,7 @@ while (restartGame){
         // Verifies the users guess is a number greater than 0 and LESS than the number entered for the range set by the user
         while (!guess || guess < 1 || guess > rangeNum){
             guess = parseInt(prompt(`Please enter a guess amount range from 1 to ${rangeNum}`));
-        }
+        };
 
         // Removes an attempt
         attempts--;
@@ -98,6 +98,28 @@ while (restartGame){
         }
     }
 
-    break; // infinite loop safeguard
+    // Prompts the user with the option to play again.
+    playAgain = prompt(`Do you wanna play again?
+    Please enter Y or N`);
+    
+    // Loop continues until user submits a valid response
+    while (true){
+    // Checks if the users response is No (AKA "N" or "n")
+        if (playAgain.toUpperCase() === "N") {
+    // Alerts the user that the game is over and the game/loop does NOT restart
+            alert(`Thanks for playing!`);
+            restartGame = false
+            break;
+
+    // Checks if the users response is Yes (AKA "Y" or "y")
+        } else if (playAgain.toUpperCase() === "Y") {
+    // The game retarts here
+            break;
+    //Prompts the user to enter a valid response and starts THIS loop again
+        } else {
+            playAgain = prompt(`Please only enter "Y" or "N"`);
+        }
+    }
+    // break; // infinite loop safeguard
 }
 
