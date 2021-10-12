@@ -64,6 +64,15 @@ while (restartGame){
 
     // Continues looping until the user guesses the correct number OR runs out of attempts. (Note: Loops until a BREAK keyword is run)
     while (true){
+        // Displays the number/answer when a secret code is entered
+        if (guess === `I'm a huge cheater`){
+            alert(`You entered the secret passcode:
+            The answer you require is ${randomNum}`);
+            prompt(`Please enter a guess from 1 to ${rangeNum}. You have ${attempts} attempt(s) left`);
+        }
+
+
+
         // Attempts to convert the users guess into a number
         guess = parseInt(guess);
 
