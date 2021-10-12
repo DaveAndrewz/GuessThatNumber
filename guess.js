@@ -16,6 +16,7 @@ let attempts;
 let guess;
 // ? For storing users response to play again or not play again ? \\
 let playAgain;
+const rangeTooHigh = `Please select an amount equal to or less than ${rangeNum}`
 
 
 
@@ -46,6 +47,34 @@ while (restartGame){
     randomNum = Math.floor(Math.random() * rangeNum) + 1; // parenthesis will be worked out first because of order of operations
 
 
+    // Prompts user to enter a number of attempts allowed (AKA Number of guesses). Also attempting to convert the user input to a number value with 'parseInt'
+    attempts = parseInt(prompt(`Please enter a number of attempts allowed:`));
+
+    // Verifies the users entry for a number of attempts allowed is a number greater than zero.
+    while (!attempts || attempts < 1){
+        attempts = parseInt(prompt(enterNumText));
+    };
+    while (attempts > rangeNum){
+        attempts = parseInt(prompt(rangeTooHigh));
+    };
+
+    // Asks user to enter a guess in the range that they selected
+    guess = prompt(`Please enter a guess from 1 to ${rangeNum}. You have ${attempts} attempt(s) left`);
+
+    // Continues looping until the user guesses the correct number OR runs out of attempts. (Note: Loops until a BREAK keyword is run)
+    while (true){
+        // Attempts to convert the users guess into a number
+        guess = parseInt(guess);
+
+        // Verifies the users guess is a number greater than 0 and LESS than the number entered for the range set by the user
+        while (!guess || guess < 1 || guess > rangeNum){
+            guess = parseInt(prompt(`Please enter a number from 1 to ${rangeNum}`));
+        }
+
+
+        
+        break;
+    }
 
     break; // infinite loop safeguard
 }
