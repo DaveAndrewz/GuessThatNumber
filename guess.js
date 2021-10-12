@@ -33,7 +33,7 @@ while (restartGame){
     //  Asks user to enter number to set the upper bound for the random number that will be created (AKA Number to be guessed).
     rangeNum = prompt(`Please enter a maximum number for the range:`);
     //  Using parseInt to attempt to convert the users response to a number value. (NOTE: The value returned from a prompt is ALWAYS a string value). Also, if the value cannot be converted then the value returned will be NaN (Not A Number)
-    rangeNum = parseInt(rangeNum); // tries to convert prompt entry into a number value.
+    rangeNum = parseInt(rangeNum); // tries to convert prompt entry into a number value. parseInt converts strings to numbers if possible.
 
     // Verifies the users entry for the range number is a number greater than zero (Note: NaN has a default boolean value of false. Also, all numbers, positive and negative, have a boolean value of true, except for 0 which has a boolean value of false).
     while (!rangeNum || rangeNum < 1){
@@ -42,7 +42,9 @@ while (restartGame){
         rangeNum = parseInt(prompt(enterNumText)); // condensed version of above two lines.
     }
 
-    
+    // Creates the random number (AKA number to be guessed by the user 'randomNum') using the range number entered by the user ('rangeNum'). 
+    randomNum = Math.floor(Math.random() * rangeNum) + 1; // parenthesis will be worked out first because of order of operations
+
 
 
     break; // infinite loop safeguard
